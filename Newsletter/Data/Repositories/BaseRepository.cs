@@ -2,6 +2,7 @@
 using Newsletter.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Newsletter.Data
 {
@@ -16,46 +17,46 @@ namespace Newsletter.Data
             _dbSet = _context.Set<T>();
         }
 
-        public T Add(T entity)
+        public async Task<T> AddAsync(T entity)
         {
             _dbSet.Add(entity);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             return entity;
         }
 
-        public bool Delete(int id)
+        public async Task<bool> DeleteAsync(int id)
         {
-            var news = _dbSet.Find(id);
+            var news = await _dbSet.FindAsync(id);
             _dbSet.Remove(news);
             return _context.SaveChanges() > 0;
 
         }
 
-        public bool Exist(int id)
+        public async Task<bool> ExistAsync(int id)
         {
-            bool result = _dbSet.Any(o => o.Id == id);
+            bool result = await _dbSet.AnyAsync(o => o.Id == id);
             return result;
         }
 
-        public IEnumerable<T> GetAll()
+        public async Task<IEnumerable<T>> GetAllAsync()
         {
-            IQueryable<T> query = _dbSet.OrderBy(o => o.Id);
+            IQueryable<T> query = _dbSet;
 
-            return query.ToList();
+            return await query.ToListAsync();
         }
 
-        public T GetById(int id)
+        public async Task<T> GetByIdAsync(int id)
         {
-            T result = _dbSet.FirstOrDefault(o => o.Id == id);
+            T result = await _dbSet.FirstOrDefaultAsync(o => o.Id == id);
 
             return result;
         }
 
-        public T Update(T entity)
+        public async Task<T> UpdateAsync(T entity)
         {
             _dbSet.Update(entity);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             return entity;
         }

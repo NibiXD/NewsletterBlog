@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Newsletter.Data;
 using Newsletter.Models;
+using System.Threading.Tasks;
+using Userletter.Services.Interfaces;
 
 namespace Newsletter.Controllers
 {
@@ -9,18 +11,18 @@ namespace Newsletter.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly UserRepository _userRepo;
+        private readonly IUserService _userService;
 
-        public UserController(UserRepository userRepo)
+        public UserController(IUserService userService)
         {
-            _userRepo = userRepo;
+            _userService = userService;
         }
 
         [HttpGet("CreateUser")]
-        public IActionResult CreateUser(User user)
+        public async Task<IActionResult> CreateUser(User user)
         {
             if (user == null) return BadRequest();
-            _userRepo.Add(user);
+            await _userService.AddUser(user);
 
             return Ok(user);
         }

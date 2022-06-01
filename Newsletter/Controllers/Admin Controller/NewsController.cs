@@ -6,6 +6,7 @@ using Newsletter.Models;
 using Newsletter.Services;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Newsletter.Controllers
 {
@@ -14,58 +15,100 @@ namespace Newsletter.Controllers
     public class NewsController : ControllerBase
     {
         private readonly INewsService _newsService;
-        private readonly IBaseRepository<News> _nRepository; 
-        private readonly INewsRepository _newsRepository;
 
-        public NewsController(IBaseRepository<News> nRepository, INewsService newsService, INewsRepository newsRepository)
+        public NewsController(INewsService newsService)
         {
-            _newsRepository = newsRepository;
             _newsService = newsService;
-            _nRepository = nRepository;
         }
 
-        [HttpGet]
-        public IActionResult GetNewsByTittle(string tittle)
+        [HttpGet("GetNewsByTittle")]
+        public async Task<IActionResult> GetNewsByTittle(string tittle)
         {
-            var result = _newsService.GetNewsByTittle(tittle);
-
+            var result = await _newsService.GetNewsByTittle(tittle);
             if (result == null) return NotFound();
 
             return Ok(result);
         }
 
         [HttpGet("GetAllNews")]
-        public IActionResult GetAllNews()
+        public async Task<IActionResult> GetAllNews()
         {
-            var news = _newsService.GetAllNews();
+            var news = await _newsService.GetAllNews();
+
+            return Ok(news);
+        }
+
+        [HttpGet("GetNewsLatestToOldest")]
+        public async Task<IActionResult> GetNewsLatestToOldest()
+        {
+            var news = await _newsService.GetLatestToOldest();
+
+            if (news == null) return NotFound();
 
             return Ok(news);
         }
 
         [HttpGet("Exists")]
-        public IActionResult Exists(int id)
+        public async Task<IActionResult> Exists(int id)
         {
-            bool news = _nRepository.Exist(id);
+            bool news = await _newsService.ExistNews(id);
 
             return Ok(news);
         }
         
-        [HttpGet("GetNewsById")]
-        public IActionResult GetNewsById(int id)
+        [HttpGet("GetNewsById/{id}")]
+        public async Task<IActionResult> GetNewsById(int id)
         {
-            var news = _nRepository.GetById(id);
-
+            if (await _newsService.ExistNews(id) == false) return NotFound("News not found!");
+            var news = await _newsService.GetNewsById(id);
             if (news == null) return NotFound();
+
+            return Ok(news);
+        }
+
+        [HttpGet("GetNewsByCategoryId/{id}")]
+        public async Task<IActionResult> GetNewsByCategoryId(int categoryId)
+        {
+            if (await _newsService.ExistNews(categoryId) == false) return NotFound("Category not found!");
+            var news = await _newsService.GetNewsByCategoryId(categoryId);
+
+            return Ok(news);
+        }
+
+        [HttpGet("GetNewsByCategoryName")]
+        public async Task<IActionResult> GetNewsByCategoryName(string categoryName)
+        {
+            var news = await _newsService.GetNewsByCategoryName(categoryName);
+
             return Ok(news);
         }
 
         [HttpPost("AddNews")]
-        public IActionResult AddNews(News obj)
+        public async Task<IActionResult> AddNews(News obj)
         {
             if (obj == null) return BadRequest();
 
-            _newsService.AddNews(obj);
+            await _newsService.AddNews(obj);
             return Ok(obj);
+        }
+
+        [HttpPatch("UpdateNews")]
+        public async Task<IActionResult> UpdateNews(News obj)
+        {
+            if (obj == null) return BadRequest();
+
+            await _newsService.UpdateNews(obj);
+            return Ok(obj);
+        }
+
+        [HttpDelete("DeleteNews/{id}")]
+        public async Task<IActionResult> DeleteNews(int id)
+        {
+            if (await _newsService.ExistNews(id) == false) return NotFound("News not found!");
+            bool result = await _newsService.DeleteNews(id);
+
+            if (!result) return BadRequest("Delete function error");
+            return Ok("Object deleted");
         }
     }
 }

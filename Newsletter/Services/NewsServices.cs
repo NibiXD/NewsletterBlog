@@ -1,6 +1,7 @@
 ﻿using Newsletter.Models;
 using System.Collections.Generic;
 using Newsletter.Data;
+using System.Threading.Tasks;
 
 namespace Newsletter.Services
 {
@@ -17,10 +18,10 @@ namespace Newsletter.Services
             _userRepository = userRepository;
         }
 
-        public News AddNews(News news)
+        public async Task<News> AddNews(News news)
         {
-            _newsRepository.Add(news);
-            IEnumerable<User> user = _userRepository.GetAll();
+            await _newsRepository.AddAsync(news);
+            IEnumerable<User> user = await _userRepository.GetAllAsync();
 
             foreach (User userItem in user)
             {
@@ -30,57 +31,51 @@ namespace Newsletter.Services
             return news;
         }
 
-        public bool DeleteNews(int id)
+        public async Task<bool> DeleteNews(int id)
         {
-            return _newsRepository.Delete(id);
+            return await _newsRepository.DeleteAsync(id);
         }
 
-        public bool ExistNews(int id)
+        public async Task<bool> ExistNews(int id)
         {
-            return _newsRepository.Exist(id);
+            return await _newsRepository.ExistAsync(id);
         }
 
-        public IEnumerable<News> GetAllNews()
+        public async Task<IEnumerable<News>> GetAllNews()
         {
-            var news = _newsRepository.GetAll();
+            var news = await _newsRepository.GetAllAsync();
 
             return news;
         }
 
-        public IEnumerable<News> GetLatestToOldest()
+        public async Task<IEnumerable<News>> GetNewsByCategoryId(int id)
         {
-            var news = _newsRepository.GetLatestToOldest();
+            var news = await _newsRepository.GetNewsByCategoryIdAsync(id);
 
             return news;
         }
 
-        public IEnumerable<News> GetNewsByCategoryId(int id)
+        public async Task<News> GetNewsById(int id)
         {
-            var news = _newsRepository.GetNewsByCategoryId(id);
+            return await _newsRepository.GetNewsByIdAsync(id);
+        }
+
+        public async Task<IEnumerable<News>> GetLatestToOldest()
+        {
+            var news = await _newsRepository.GetLatestToOldestAsync();
 
             return news;
         }
 
-        public News GetNewsById(int id)
+        public async Task<News> UpdateNews(News news)
         {
-            return _newsRepository.GetNewsById(id);
+            return await _newsRepository.UpdateAsync(news);
         }
 
-        public IEnumerable<News> GetOldestToLatest()
+        public async Task<IEnumerable<News>> GetNewsByTittle(string tittle)
         {
-            var news = _newsRepository.GetOldestToLatest();
-
-            return news;
-        }
-
-        public News UpdateNews(News news)
-        {
-            return _newsRepository.Update(news);
-        }
-
-        public News GetNewsByTittle(string tittle)
-        {
-            IEnumerable<News> news = _newsRepository.GetAll();
+            IEnumerable<News> news = await _newsRepository.GetAllAsync();
+            List<News> List = new List<News>();
 
             if (tittle == null) return null;
 
@@ -88,19 +83,20 @@ namespace Newsletter.Services
             {
                 if (item.NewsTittle.Contains(tittle))
                 {
-                    return item;
+                    List.Add(item);
                 }
             }
-            return null;
+
+            return List;
         }
 
-        public News GetNewsByCategoryName(string categoryName)
+        public async Task<IEnumerable<News>> GetNewsByCategoryName(string categoryName)
         {
-            IEnumerable<News> news = _newsRepository.GetAll();
+            IEnumerable<News> news = await _newsRepository.GetAllAsync();
 
             if (categoryName == null) return null;
 
-            return null;
+            return news;
         }
     }
 }
