@@ -52,3 +52,14 @@ C:\Users\cdani\source\repos\Newsletter\Newsletter\obj\Debug\net5.0\refint\Newsle
 C:\Users\cdani\source\repos\Newsletter\Newsletter\obj\Debug\net5.0\Newsletter.pdb
 C:\Users\cdani\source\repos\Newsletter\Newsletter\obj\Debug\net5.0\Newsletter.genruntimeconfig.cache
 C:\Users\cdani\source\repos\Newsletter\Newsletter\obj\Debug\net5.0\ref\Newsletter.dll
+C:\Users\cdani\source\repos\Newsletter\Newsletter\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\cdani\source\repos\Newsletter\Newsletter\bin\Debug\net5.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Users\cdani\source\repos\Newsletter\Newsletter\bin\Debug\net5.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\Users\cdani\source\repos\Newsletter\Newsletter\bin\Debug\net5.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\cdani\source\repos\Newsletter\Newsletter\bin\Debug\net5.0\Microsoft.Extensions.Identity.Core.dll
+C:\Users\cdani\source\repos\Newsletter\Newsletter\bin\Debug\net5.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\cdani\source\repos\Newsletter\Newsletter\bin\Debug\net5.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\cdani\source\repos\Newsletter\Newsletter\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\cdani\source\repos\Newsletter\Newsletter\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\cdani\source\repos\Newsletter\Newsletter\bin\Debug\net5.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\cdani\source\repos\Newsletter\Newsletter\bin\Debug\net5.0\System.IdentityModel.Tokens.Jwt.dll

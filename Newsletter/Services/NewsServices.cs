@@ -8,10 +8,10 @@ namespace Newsletter.Services
     public class NewsService : INewsService
     {
         private readonly INewsRepository _newsRepository;
-        private readonly IUserRepository _userRepository;
+        private readonly ISubscriberRepository _userRepository;
         private readonly EmailSenderService _emailSenderService;
 
-        public NewsService(INewsRepository newsRepository, EmailSenderService emailSenderService, IUserRepository userRepository)
+        public NewsService(INewsRepository newsRepository, EmailSenderService emailSenderService, ISubscriberRepository userRepository)
         {
             _newsRepository = newsRepository;
             _emailSenderService = emailSenderService;
@@ -21,9 +21,9 @@ namespace Newsletter.Services
         public async Task<News> AddNews(News news)
         {
             await _newsRepository.AddAsync(news);
-            IEnumerable<User> user = await _userRepository.GetAllAsync();
+            IEnumerable<Subscriber> user = await _userRepository.GetAllAsync();
 
-            foreach (User userItem in user)
+            foreach (Subscriber userItem in user)
             {
                 _emailSenderService.SendMail(userItem.Email, news);
             }

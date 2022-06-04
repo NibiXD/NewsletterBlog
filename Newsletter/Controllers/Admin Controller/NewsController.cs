@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newsletter.Data;
@@ -12,6 +13,7 @@ namespace Newsletter.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    
     public class NewsController : ControllerBase
     {
         private readonly INewsService _newsService;
@@ -30,6 +32,7 @@ namespace Newsletter.Controllers
             return Ok(result);
         }
 
+        [Authorize]
         [HttpGet("GetAllNews")]
         public async Task<IActionResult> GetAllNews()
         {

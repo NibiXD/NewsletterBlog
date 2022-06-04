@@ -8,19 +8,19 @@ namespace Newsletter.Controllers.Admin_Controller
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AdminUserController : ControllerBase
+    public class AdminSubscriberController : ControllerBase
     {
-        private readonly IUserService _userService;
+        private readonly ISubscriberService _subscriberService;
 
-        public AdminUserController(IUserService userService)
+        public AdminSubscriberController(ISubscriberService subscriberService)
         {
-            _userService = userService;
+            _subscriberService = subscriberService;
         }
 
         [HttpGet("GetAllUsers")]
         public async Task<IActionResult> GetALlUsers()
         {
-            var categories = await _userService.GetAllUsers();
+            var categories = await _subscriberService.GetAllUsers();
 
             return Ok(categories);
         }
@@ -28,35 +28,36 @@ namespace Newsletter.Controllers.Admin_Controller
         [HttpGet("ExistsUser/{id}")]
         public async Task<IActionResult> ExistsUser(int userId)
         {
-            if (await _userService.ExistUser(userId) == false) return NotFound("User not found!");
-            var categories = await _userService.ExistUser(userId);
+            if (await _subscriberService.ExistUser(userId) == false) return NotFound("User not found!");
+            var categories = await _subscriberService.ExistUser(userId);
 
             return Ok(categories);
         }
 
         [HttpPost("AddUser")]
-        public async Task<IActionResult> AddUser(User obj)
+        public async Task<IActionResult> AddUser(Subscriber obj)
         {
             if (obj == null) return BadRequest();
 
-            await _userService.AddUser(obj);
+            await _subscriberService.AddUser(obj);
             return Ok(obj);
         }
 
         [HttpPatch("UpdateUser")]
-        public async Task<IActionResult> UpdateUser(User obj)
+        public async Task<IActionResult> UpdateUser(Subscriber obj)
         {
             if (obj == null) return BadRequest();
 
-            await _userService.UpdateUser(obj);
+            await _subscriberService.UpdateUser(obj);
             return Ok(obj);
         }
 
         [HttpDelete("DeleteUser/{id}")]
         public async Task<IActionResult> DeleteUser(int userId)
         {
-            bool result = await _userService.DeleteUser(userId);
-            if (!result) return NotFound("User not found");
+            if (await _subscriberService.ExistUser(userId) == false) return NotFound();
+            bool result = await _subscriberService.DeleteUser(userId);
+            if (!result) return BadRequest("Failed to delete user");
             return Ok("User deleted!");
         }
     }
