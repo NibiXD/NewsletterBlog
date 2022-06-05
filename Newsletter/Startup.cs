@@ -20,7 +20,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using AutoMapper;
 using System.Threading.Tasks;
+using Userletter.Services.Interfaces;
 
 namespace Newsletter
 {
@@ -42,12 +44,15 @@ namespace Newsletter
 
             services.AddDbContext<NewsletterContext>(options => options.UseSqlite(Configuration.GetConnectionString("Default")));
 
+            services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
             services.AddScoped<INewsRepository, NewsRepository>();
             services.AddScoped<INewsService, NewsService>();
             services.AddScoped<IBaseRepository<News>, BaseRepository<News>>();
             services.AddScoped<ISubscriberRepository, SubscriberRepository>();
+            services.AddScoped<ISubscriberService, SubscriberService>();
             services.AddScoped<EmailSenderService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddIdentity<IdentityUser, IdentityRole>(options =>
             {
@@ -86,7 +91,7 @@ namespace Newsletter
                 };
             });
 
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(opt => opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Newsletter", Version = "v1" });
@@ -107,9 +112,9 @@ namespace Newsletter
 
             app.UseRouting();
 
-            app.UseAuthorization();
-
             app.UseAuthentication();
+
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

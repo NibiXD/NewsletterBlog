@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newsletter.Data;
 using Newsletter.Models;
@@ -35,6 +36,7 @@ namespace Newsletter.Controllers.Admin_Controller
             return Ok(categories);
         }
 
+        [Authorize]
         [HttpPost("AddCategory")]
         public async Task<IActionResult> AddCategory(Category obj)
         {
@@ -44,6 +46,7 @@ namespace Newsletter.Controllers.Admin_Controller
             return Ok(obj);
         }
 
+        [Authorize]
         [HttpPatch("UpdateCategory")]
         public async Task<IActionResult> UpdateCategory(Category obj)
         {
@@ -53,6 +56,7 @@ namespace Newsletter.Controllers.Admin_Controller
             return Ok(obj);
         }
 
+        [Authorize]
         [HttpDelete("DeleteCategory/{id}")]
         public async Task<IActionResult> DeleteCategory(int categoryId)
         {

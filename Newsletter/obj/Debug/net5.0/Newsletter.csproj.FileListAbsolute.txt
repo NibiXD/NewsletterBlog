@@ -63,3 +63,9 @@ C:\Users\cdani\source\repos\Newsletter\Newsletter\bin\Debug\net5.0\Microsoft.Ide
 C:\Users\cdani\source\repos\Newsletter\Newsletter\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\Users\cdani\source\repos\Newsletter\Newsletter\bin\Debug\net5.0\Microsoft.IdentityModel.Tokens.dll
 C:\Users\cdani\source\repos\Newsletter\Newsletter\bin\Debug\net5.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\cdani\source\repos\Newsletter\Newsletter\bin\Debug\net5.0\AutoMapper.dll
+C:\Users\cdani\source\repos\Newsletter\Newsletter\bin\Debug\net5.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\cdani\source\repos\Newsletter\Newsletter\bin\Debug\net5.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\cdani\source\repos\Newsletter\Newsletter\bin\Debug\net5.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\cdani\source\repos\Newsletter\Newsletter\bin\Debug\net5.0\Newtonsoft.Json.dll
+C:\Users\cdani\source\repos\Newsletter\Newsletter\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll

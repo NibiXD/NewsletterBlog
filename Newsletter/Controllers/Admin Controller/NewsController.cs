@@ -1,13 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Newsletter.Data;
 using Newsletter.Models;
 using Newsletter.Services;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using Newsletter.Dtos;
 
 namespace Newsletter.Controllers
 {
@@ -17,10 +14,12 @@ namespace Newsletter.Controllers
     public class NewsController : ControllerBase
     {
         private readonly INewsService _newsService;
+        private readonly IMapper _mapper;
 
-        public NewsController(INewsService newsService)
+        public NewsController(INewsService newsService, IMapper mapper)
         {
             _newsService = newsService;
+            _mapper = mapper;
         }
 
         [HttpGet("GetNewsByTittle")]
@@ -32,7 +31,6 @@ namespace Newsletter.Controllers
             return Ok(result);
         }
 
-        [Authorize]
         [HttpGet("GetAllNews")]
         public async Task<IActionResult> GetAllNews()
         {
@@ -86,24 +84,29 @@ namespace Newsletter.Controllers
             return Ok(news);
         }
 
+        [Authorize]
         [HttpPost("AddNews")]
-        public async Task<IActionResult> AddNews(News obj)
+        public async Task<IActionResult> AddNews(NewsDto obj)
         {
+            obj.NewsAuthor = User.Identity.Name;
             if (obj == null) return BadRequest();
 
             await _newsService.AddNews(obj);
             return Ok(obj);
         }
 
+        [Authorize]
         [HttpPatch("UpdateNews")]
-        public async Task<IActionResult> UpdateNews(News obj)
+        public async Task<IActionResult> UpdateNews(NewsDto obj)
         {
+            var result = _mapper.Map<News>(obj);
             if (obj == null) return BadRequest();
 
             await _newsService.UpdateNews(obj);
             return Ok(obj);
         }
 
+        [Authorize]
         [HttpDelete("DeleteNews/{id}")]
         public async Task<IActionResult> DeleteNews(int id)
         {

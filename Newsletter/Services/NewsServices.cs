@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using Newsletter.Data;
 using System.Threading.Tasks;
+using Newsletter.Dtos;
+using AutoMapper;
 
 namespace Newsletter.Services
 {
@@ -10,25 +12,28 @@ namespace Newsletter.Services
         private readonly INewsRepository _newsRepository;
         private readonly ISubscriberRepository _userRepository;
         private readonly EmailSenderService _emailSenderService;
+        private readonly IMapper _mapper;
 
-        public NewsService(INewsRepository newsRepository, EmailSenderService emailSenderService, ISubscriberRepository userRepository)
+        public NewsService(INewsRepository newsRepository, EmailSenderService emailSenderService, ISubscriberRepository userRepository, IMapper mapper)
         {
             _newsRepository = newsRepository;
             _emailSenderService = emailSenderService;
             _userRepository = userRepository;
+            _mapper = mapper;
         }
 
-        public async Task<News> AddNews(News news)
+        public async Task<News> AddNews(NewsDto news)
         {
-            await _newsRepository.AddAsync(news);
+            var result = _mapper.Map<News>(news);
+            await _newsRepository.AddAsync(result);
             IEnumerable<Subscriber> user = await _userRepository.GetAllAsync();
 
             foreach (Subscriber userItem in user)
             {
-                _emailSenderService.SendMail(userItem.Email, news);
+                _emailSenderService.SendMail(userItem.Email, result);
             }
 
-            return news;
+            return result;
         }
 
         public async Task<bool> DeleteNews(int id)
@@ -57,7 +62,7 @@ namespace Newsletter.Services
 
         public async Task<News> GetNewsById(int id)
         {
-            return await _newsRepository.GetNewsByIdAsync(id);
+            return await _newsRepository.GetByIdAsync(id);
         }
 
         public async Task<IEnumerable<News>> GetLatestToOldest()
@@ -67,9 +72,10 @@ namespace Newsletter.Services
             return news;
         }
 
-        public async Task<News> UpdateNews(News news)
+        public async Task<News> UpdateNews(NewsDto news)
         {
-            return await _newsRepository.UpdateAsync(news);
+            var result = _mapper.Map<News>(news);
+            return await _newsRepository.UpdateAsync(result);
         }
 
         public async Task<IEnumerable<News>> GetNewsByTittle(string tittle)

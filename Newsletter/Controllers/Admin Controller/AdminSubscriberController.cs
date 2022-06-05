@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newsletter.Dtos;
 using Newsletter.Models;
 using System.Threading.Tasks;
 using Userletter.Services.Interfaces;
@@ -17,6 +19,7 @@ namespace Newsletter.Controllers.Admin_Controller
             _subscriberService = subscriberService;
         }
 
+        [Authorize]
         [HttpGet("GetAllUsers")]
         public async Task<IActionResult> GetALlUsers()
         {
@@ -25,6 +28,7 @@ namespace Newsletter.Controllers.Admin_Controller
             return Ok(categories);
         }
 
+        [Authorize]
         [HttpGet("ExistsUser/{id}")]
         public async Task<IActionResult> ExistsUser(int userId)
         {
@@ -34,8 +38,9 @@ namespace Newsletter.Controllers.Admin_Controller
             return Ok(categories);
         }
 
+        [Authorize]
         [HttpPost("AddUser")]
-        public async Task<IActionResult> AddUser(Subscriber obj)
+        public async Task<IActionResult> AddUser(SubscriberDto obj)
         {
             if (obj == null) return BadRequest();
 
@@ -43,8 +48,9 @@ namespace Newsletter.Controllers.Admin_Controller
             return Ok(obj);
         }
 
+        [Authorize]
         [HttpPatch("UpdateUser")]
-        public async Task<IActionResult> UpdateUser(Subscriber obj)
+        public async Task<IActionResult> UpdateUser(SubscriberDto obj)
         {
             if (obj == null) return BadRequest();
 
@@ -52,6 +58,7 @@ namespace Newsletter.Controllers.Admin_Controller
             return Ok(obj);
         }
 
+        [Authorize]
         [HttpDelete("DeleteUser/{id}")]
         public async Task<IActionResult> DeleteUser(int userId)
         {

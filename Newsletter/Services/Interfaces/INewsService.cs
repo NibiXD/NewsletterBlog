@@ -1,4 +1,5 @@
-﻿using Newsletter.Models;
+﻿using Newsletter.Dtos;
+using Newsletter.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -6,8 +7,8 @@ namespace Newsletter.Services
 {
     public interface INewsService
     {
-        Task<News> AddNews(News news);
-        Task<News> UpdateNews(News news);
+        Task<News> AddNews(NewsDto news);
+        Task<News> UpdateNews(NewsDto news);
         Task<bool> ExistNews(int id);
         Task<bool> DeleteNews(int id);
         Task<IEnumerable<News>> GetAllNews();

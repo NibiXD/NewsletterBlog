@@ -7,10 +7,5 @@ namespace Newsletter.Models
         public string Name { get; set; }
         public IEnumerable<News> News { get; set; }
 
-        public Category(int id, string name) : base(id)
-        {
-            Id = id;
-            Name = name;
-        }
     }
 }

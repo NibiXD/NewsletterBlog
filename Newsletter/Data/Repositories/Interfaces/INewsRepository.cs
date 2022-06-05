@@ -7,7 +7,6 @@ namespace Newsletter.Data
 {
     public interface INewsRepository : IBaseRepository<News>
     {
-        Task<News> GetNewsByIdAsync(int id);
         Task<IEnumerable<News>> GetNewsByCategoryIdAsync(int id);
         Task<IEnumerable<News>> GetLatestToOldestAsync();
         Task<IEnumerable<News>> GetNewsByTittleAsync(string tittle);

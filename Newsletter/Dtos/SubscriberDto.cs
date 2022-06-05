@@ -1,10 +1,9 @@
-﻿namespace Newsletter.Models
+﻿namespace Newsletter.Dtos
 {
-    public class Subscriber : BaseEntity
+    public class SubscriberDto
     {
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Email { get; set; }
-
     }
 }

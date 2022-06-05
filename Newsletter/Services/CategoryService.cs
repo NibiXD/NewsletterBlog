@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Newsletter.Services
 {
-    public class CategorService : ICategoryService
+    public class CategoryService : ICategoryService
     {
         private readonly ICategoryRepository _categoryRepository;
 
-        public CategorService(ICategoryRepository categoryRepository)
+        public CategoryService(ICategoryRepository categoryRepository)
         {
             _categoryRepository = categoryRepository;
         }

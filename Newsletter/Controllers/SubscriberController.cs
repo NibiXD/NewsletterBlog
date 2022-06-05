@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newsletter.Data;
+using Newsletter.Dtos;
 using Newsletter.Models;
 using System.Threading.Tasks;
 using Userletter.Services.Interfaces;
@@ -18,8 +19,8 @@ namespace Newsletter.Controllers
             _subscriberService = subscriberService;
         }
 
-        [HttpGet("CreateUser")]
-        public async Task<IActionResult> CreateUser(Subscriber user)
+        [HttpPost("CreateUser")]
+        public async Task<IActionResult> CreateUser(SubscriberDto user)
         {
             if (user == null) return BadRequest();
             await _subscriberService.AddUser(user);

@@ -9,6 +9,5 @@ namespace Newsletter.Data
         {
         }
 
-
     }
 }
