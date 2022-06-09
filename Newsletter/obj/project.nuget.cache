@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "6aJDZY/TxIYCp0Zvw4I8/FoPXsuXvPX/Y2dn5ff4q3olwZUVEBwaEPp3Wgyia3x77mL1FUJAMlLkJ42DxCntmA==",
+  "dgSpecHash": "DaGxFMxXf1k1GGIDpbt3zX/9Gfnrr3F+nz5OApUrSdF8+BohP3TW1llm53ut9Cd1c5k320CXoBCDq/pr1gHUsw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\cdani\\source\\repos\\Newsletter\\Newsletter\\Newsletter.csproj",
+  "projectFilePath": "C:\\Users\\cdani\\source\\repos\\Newsletter\\NewsletterBlog\\Newsletter\\Newsletter.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\cdani\\.nuget\\packages\\automapper\\7.0.1\\automapper.7.0.1.nupkg.sha512",
     "C:\\Users\\cdani\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\5.0.1\\automapper.extensions.microsoft.dependencyinjection.5.0.1.nupkg.sha512",

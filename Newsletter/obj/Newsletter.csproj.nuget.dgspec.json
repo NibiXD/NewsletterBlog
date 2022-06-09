@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\cdani\\source\\repos\\Newsletter\\Newsletter\\Newsletter.csproj": {}
+    "C:\\Users\\cdani\\source\\repos\\Newsletter\\NewsletterBlog\\Newsletter\\Newsletter.csproj": {}
   },
   "projects": {
-    "C:\\Users\\cdani\\source\\repos\\Newsletter\\Newsletter\\Newsletter.csproj": {
+    "C:\\Users\\cdani\\source\\repos\\Newsletter\\NewsletterBlog\\Newsletter\\Newsletter.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\cdani\\source\\repos\\Newsletter\\Newsletter\\Newsletter.csproj",
+        "projectUniqueName": "C:\\Users\\cdani\\source\\repos\\Newsletter\\NewsletterBlog\\Newsletter\\Newsletter.csproj",
         "projectName": "Newsletter",
-        "projectPath": "C:\\Users\\cdani\\source\\repos\\Newsletter\\Newsletter\\Newsletter.csproj",
+        "projectPath": "C:\\Users\\cdani\\source\\repos\\Newsletter\\NewsletterBlog\\Newsletter\\Newsletter.csproj",
         "packagesPath": "C:\\Users\\cdani\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\cdani\\source\\repos\\Newsletter\\Newsletter\\obj\\",
+        "outputPath": "C:\\Users\\cdani\\source\\repos\\Newsletter\\NewsletterBlog\\Newsletter\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

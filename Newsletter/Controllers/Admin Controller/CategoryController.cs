@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newsletter.Data;
+using Newsletter.Dtos;
 using Newsletter.Models;
 using Newsletter.Services.Interfaces;
 using System.Threading.Tasks;
@@ -38,7 +39,7 @@ namespace Newsletter.Controllers.Admin_Controller
 
         [Authorize]
         [HttpPost("AddCategory")]
-        public async Task<IActionResult> AddCategory(Category obj)
+        public async Task<IActionResult> AddCategory(CategoryDto obj)
         {
             if (obj == null) return BadRequest();
 

@@ -2,7 +2,7 @@
 
 namespace Newsletter.Data
 {
-    public class CategoryRepository : BaseRepository<Category>, IBaseRepository<Category>
+    public class CategoryRepository : BaseRepository<Category>, ICategoryRepository
     {
         public CategoryRepository(NewsletterContext context) : base(context)
         {

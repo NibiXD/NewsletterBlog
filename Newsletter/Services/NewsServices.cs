@@ -10,15 +10,15 @@ namespace Newsletter.Services
     public class NewsService : INewsService
     {
         private readonly INewsRepository _newsRepository;
-        private readonly ISubscriberRepository _userRepository;
+        private readonly ISubscriberRepository _subscriberRepository;
         private readonly EmailSenderService _emailSenderService;
         private readonly IMapper _mapper;
 
-        public NewsService(INewsRepository newsRepository, EmailSenderService emailSenderService, ISubscriberRepository userRepository, IMapper mapper)
+        public NewsService(INewsRepository newsRepository, EmailSenderService emailSenderService, ISubscriberRepository subscriberRepository, IMapper mapper)
         {
             _newsRepository = newsRepository;
             _emailSenderService = emailSenderService;
-            _userRepository = userRepository;
+            _subscriberRepository = subscriberRepository;
             _mapper = mapper;
         }
 
@@ -26,11 +26,11 @@ namespace Newsletter.Services
         {
             var result = _mapper.Map<News>(news);
             await _newsRepository.AddAsync(result);
-            IEnumerable<Subscriber> user = await _userRepository.GetAllAsync();
+            IEnumerable<Subscriber> subscriber = await _subscriberRepository.GetAllAsync();
 
-            foreach (Subscriber userItem in user)
+            foreach (Subscriber subscriberItem in subscriber)
             {
-                _emailSenderService.SendMail(userItem.Email, result);
+                _emailSenderService.SendMail(subscriberItem.Email, result);
             }
 
             return result;

@@ -23,6 +23,7 @@ using System.Text;
 using AutoMapper;
 using System.Threading.Tasks;
 using Userletter.Services.Interfaces;
+using Newsletter.Services.Interfaces;
 
 namespace Newsletter
 {
@@ -50,6 +51,8 @@ namespace Newsletter
             services.AddScoped<IBaseRepository<News>, BaseRepository<News>>();
             services.AddScoped<ISubscriberRepository, SubscriberRepository>();
             services.AddScoped<ISubscriberService, SubscriberService>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<EmailSenderService>();
             services.AddScoped<IUserService, UserService>();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

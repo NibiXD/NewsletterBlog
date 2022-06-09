@@ -1,5 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Newsletter.Data;
+using Newsletter.Dtos;
 using Newsletter.Models;
 using Newsletter.Services.Interfaces;
 using System.Collections.Generic;
@@ -10,16 +12,18 @@ namespace Newsletter.Services
     public class CategoryService : ICategoryService
     {
         private readonly ICategoryRepository _categoryRepository;
+        private readonly IMapper _mapper;
 
-        public CategoryService(ICategoryRepository categoryRepository)
+        public CategoryService(ICategoryRepository categoryRepository, IMapper mapper)
         {
             _categoryRepository = categoryRepository;
+            _mapper = mapper;
         }
 
-        public async Task<Category> AddCategory(Category entity)
+        public async Task<Category> AddCategory(CategoryDto entity)
         {
-            return await _categoryRepository.AddAsync(entity);
-
+            var result = _mapper.Map<Category>(entity);
+            return await _categoryRepository.AddAsync(result);
         }
 
         public async Task<bool> DeleteCategory(int id)
